@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Poisoned Tea Party - A Gothic Mystery</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <h1>☠️ The Poisoned Tea Party ☠️</h1>
+        <p class="story">
+            The grand clock struck four as <strong>Ms. Whitmore</strong>, pale as the porcelain in her hand, 
+            collapsed onto the blood-red roses of her garden party. The teacup shattered, its contents 
+            <em>reeking of bitter almonds</em>—the telltale scent of cyanide. Four shadows loomed over her 
+            convulsing form... but which one held death in their heart?
+        </p>
+
+        <div class="clues">
+            <h2>🕯️ The Damning Evidence:</h2>
+            <ul>
+                <li>The poison hid within the <strong>sugar cubes</strong>, dissolving like winter's last snow.</li>
+                <li>Whitmore always took <strong>two sugars</strong>—a habit known only to those closest.</li>
+                <li>The killer watched, waited, and <em>knew exactly which cubes to taint</em>.</li>
+            </ul>
+        </div>
+
+        <h2>👻 Those Who Linger in the Shadows:</h2>
+        <div class="suspects">
+            <!-- Suspect 1 -->
+            <div class="suspect-card">
+                <img src="images/sister.jpg" alt="Eleanor, Sister" class="suspect-image">
+                <h3>Eleanor, Sister</h3>
+                <p>"The family jewels will be mine at last," she whispered to the mirror that morning.</p>
+                <button class="mobile-clue-btn">🔍 Show Clue</button>
+                <div id="eleanor-clue" class="hidden-clue">
+                    <strong>Dark Truth:</strong> The apothecary's ledger shows she purchased <em>slow-acting venom</em> last Thursday eve.
+                </div>
+                <button class="guilty-btn" onclick="accuse('eleanor')">Declare Guilty</button>
+            </div>
+
+            <!-- Suspect 2 -->
+            <div class="suspect-card">
+                <img src="images/doctor.jpg" alt="Dr. Felix, Physician" class="suspect-image">
+                <h3>Dr. Felix, Physician</h3>
+                <p>His bag clinked with vials of unknown tinctures as he knelt beside her.</p>
+                <button class="mobile-clue-btn">🔍 Show Clue</button>
+                <div id="felix-clue" class="hidden-clue">
+                    <strong>Dark Truth:</strong> His silver vial contained <em>antidotes</em>... but why carry them before the poisoning?
+                </div>
+                <button class="guilty-btn" onclick="accuse('felix')">Declare Guilty</button>
+            </div>
+
+            <!-- Suspect 3 -->
+            <div class="suspect-card">
+                <img src="images/maid.jpg" alt="Rebecca, Maid" class="suspect-image">
+                <h3>Rebecca, Maid</h3>
+                <p>Her trembling hands had refilled the sugar bowl moments before the screams began.</p>
+                <button class="mobile-clue-btn">🔍 Show Clue</button>
+                <div id="rebecca-clue" class="hidden-clue">
+                    <strong>Dark Truth:</strong> The kitchen boy saw her <em>selecting specific cubes</em> from the cellar stores.
+                </div>
+                <button class="guilty-btn" onclick="accuse('rebecca')">Declare Guilty</button>
+            </div>
+
+            <!-- Suspect 4 -->
+            <div class="suspect-card">
+                <img src="images/ex.jpg" alt="Charles, Ex-Fiancé" class="suspect-image">
+                <h3>Charles, Ex-Fiancé</h3>
+                <p>"Till death do us part," he had vowed... and now death had come.</p>
+                <button class="mobile-clue-btn">🔍 Show Clue</button>
+                <div id="charles-clue" class="hidden-clue">
+                    <strong>Dark Truth:</strong> His teacup held <em>three sugars</em>—a habit Whitmore always mocked.
+                </div>
+                <button class="guilty-btn" onclick="accuse('charles')">Declare Guilty</button>
+            </div>
+        </div>
+
+        <div id="solution" class="hidden"></div>
+    </div>
+
+    <script>
+        // Toggle clues on mobile
+        document.querySelectorAll('.mobile-clue-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.target.nextElementSibling.classList.toggle('hidden-clue');
+            });
+        });
+
+        function accuse(suspect) {
+            const solutionDiv = document.getElementById("solution");
+            
+            if (suspect === "rebecca") {
+                solutionDiv.innerHTML = `
+                    <div class="verdict correct">
+                        <h3>⚰️ The Truth Unveiled! ⚰️</h3>
+                        <p>Rebecca's vengeance was colder than the grave. Knowing Whitmore would take <strong>exactly two sugars</strong>, 
+                        she had laced <em>only the cubes at the bowl's center</em>—the ones untouched by others. The fired maid 
+                        remembered every slight, every cruel word... and served her revenge with afternoon tea.</p>
+                        <p class="final-line">The sugar bowl now sits empty, save for the echo of her laughter.</p>
+                    </div>
+                `;
+            } else {
+                const names = {eleanor: "Eleanor", felix: "Dr. Felix", charles: "Charles"};
+                solutionDiv.innerHTML = `
+                    <div class="verdict incorrect">
+                        <h3>🔪 Wrong Accusation! 🔪</h3>
+                        <p>${names[suspect]} stares at you with hollow eyes as the constables drag them away. 
+                        The real killer remains free... and <em>you've made yourself their next target</em>.</p>
+                        <p></p> 
+                        <p>"⚰️ Congrats! You’ve won a free stay at Whitmore Manor! (Terms: Survive the night.)⚰️"</p>
+
+                        <p class="final-line">Somewhere, a tea kettle begins to whistle...</p> 
+
+                    </div>
+                `;
+            }
+            solutionDiv.classList.remove("hidden");
+            solutionDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
